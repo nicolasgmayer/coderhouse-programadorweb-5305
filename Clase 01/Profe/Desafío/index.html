@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Clase 01 - Coderhouse</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Workshop</h1>
+          <p class="lead">Administración de Alumnos</p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>E-mail</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="col col-auto">
+          <form class="frm-alumnos">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Nombre" />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Apellido"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="DNI" />
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="E-mail" />
+              </div>
+            </div>
+            <div class="form-row">
+              <button id="btn-add" class="btn btn-outline-primary btn-block">
+                Agregar Alumno
+              </button>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="DNI" />
+              </div>
+              <div class="col">
+                <button
+                  id="btn-delete"
+                  class="btn btn-outline-danger btn-block"
+                >
+                  Eliminar Alumno
+                </button>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Nombre" />
+              </div>
+              <div class="col">
+                <button
+                  id="btn-search"
+                  class="btn btn-outline-success btn-block"
+                >
+                  Buscar Alumno
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Inclusión de JavaScript desde un archivo externo -->
+    <script src="scripts/workshop.js"></script>
+  </body>
+</html>

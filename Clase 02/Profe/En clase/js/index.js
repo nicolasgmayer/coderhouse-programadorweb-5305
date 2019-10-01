@@ -50,7 +50,7 @@
 
 ////Operadores de comparación
 ////Estrictamente igual
-// var firstName = 'Juan';
+// var firstName = 'Mauro';
 // console.log(firstName === 'Juan'); //true
 
 // var number = 1234;
