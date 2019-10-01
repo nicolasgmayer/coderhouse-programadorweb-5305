@@ -12,7 +12,7 @@
 //   console.log('Tu nombre no es Juan');
 // }
 
-// var resultOfGame = 'Perdió';
+// var resultOfGame = 'asd';
 // switch (resultOfGame) {
 //   case 'Ganó':
 //     console.log('Suma 3 puntos');
@@ -79,7 +79,7 @@
 
 // console.log(obj1 !== obj2); //false
 
-////Mayor o Mayor e igual
+//Mayor o Mayor e igual
 // var number = 5;
 // console.log('7' > number); //true
 // console.log('Ana' > 'Pedro'); //false A = 65 P = 80
