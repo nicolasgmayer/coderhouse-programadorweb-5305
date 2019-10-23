@@ -1,23 +1,23 @@
-function CuentaBancaria (nomTitu, apelTitu, numCuenta, saldo){
+function CuentaBancaria(nomTitu, apelTitu, numCuenta, saldo) {
     this.nom = nomTitu;
     this.ape = apelTitu;
     this.cuenta = numCuenta;
     this.mov = [];
     this.sal = saldo;
-    
 
-    this.nombreCompleto=function(){
+
+    this.nombreCompleto = function() {
         console.log(this.nom + ' ' + this.ape);
     }
 
     this.debito = function(monto) {
         var monto1 = monto;
-        var resIndex=0;
-        if (this.sal >0){
-            resIndex=this.sal- monto1;
-            if (resIndex<=0) {
+        var resIndex = 0;
+        if (this.sal > 0) {
+            resIndex = this.sal - monto1;
+            if (resIndex <= 0) {
                 return ('No puede realizarse el debito por saldo insuficiente: ' + this.sal);
-            }else{
+            } else {
                 this.sal = resIndex;
                 this.mov.push('- ' + monto1);
                 return resIndex;
@@ -27,7 +27,7 @@ function CuentaBancaria (nomTitu, apelTitu, numCuenta, saldo){
 
     }
 
-    this.credito = function(monto){
+    this.credito = function(monto) {
         var monto1 = monto;
         var resCred = this.sal + monto1;
         this.sal = resCred;
@@ -36,20 +36,25 @@ function CuentaBancaria (nomTitu, apelTitu, numCuenta, saldo){
         return resCred;
     }
 
-    this.mostrarSaldo = function(){
-        
+    this.mostrarSaldo = function() {
+
         console.log('Su saldo es: ' + this.sal);
     }
 
-    this.mostrarMov = function(){
-         console.log(this.mov);
+    this.mostrarMov = function() {
+        console.log(this.mov);
+    }
+
+    this.guardar = function() {
+        localStorage.setItem('saldo', this.sal);
+        localStorage.setItem('numCuenta', this.cuenta);
     }
 
 }
 
 var cli1 = new CuentaBancaria('Nicolas', 'Mayer', '40513305', 1000);
-var compraOnline=cli1.debito(200);
-var transac=cli1.credito(1500);
+var compraOnline = cli1.debito(200);
+var transac = cli1.credito(1500);
 cli1.nombreCompleto();
 cli1.mostrarSaldo();
 console.log(compraOnline + ' ' + transac);
