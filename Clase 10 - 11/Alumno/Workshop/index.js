@@ -1,3 +1,4 @@
+document.getElementById('btnFind').disabled = true;
 var alumnList = [];
 
 
@@ -11,7 +12,8 @@ var btnAdd = document.getElementById('btnAdd1');
 var btnDel = document.getElementById('btnDel1');
 var btnFind = document.getElementById('btnFind');
 
-
+txtLName.onblur = validateLName;
+txtEmail.onkeyup = validateEmail;
 txtName.onblur = validateName;
 txtDNI.onblur = validateDNI;
 btnAdd.onclick = addAlumn;
@@ -19,6 +21,18 @@ btnDel.onclick = deleteAlumn;
 btnFind.onclick = searchAlumn;
 
 function validateName(event) {
+    inputNode = event.target;
+    if (inputNode.value === '') {
+        inputNode.className = 'form-control is-invalid';
+        inputNode.placeholder = 'Ingrese un nombre por favor';
+    } else {
+        inputNode.className = 'form-control is-valid';
+    }
+
+
+}
+
+function validateLName(event) {
     inputNode = event.target;
     if (inputNode.value === '') {
         inputNode.className = 'form-control is-invalid';
@@ -124,3 +138,30 @@ function searchAlumn(event) {
 function isInTheList() {
 
 }
+
+
+
+function validateEmail(event) {
+    inputNode = event.target;
+    if (inputNode.value === '') {
+        console.log('no se ingresa string');
+        inputNode.className = 'form-control is-invalid';
+        inputNode.placeholder = 'Ingrese un Email correcto';
+
+    } else if (inputNode.value.indexOf('@') > 0) {
+        var indexString = inputNode.value.indexOf('@');
+        if (inputNode.value.indexOf('.', indexString) > 1) {
+            inputNode.className = 'form-control is-valid';
+
+        } else {
+            inputNode.className = 'form-control is-invalid';
+        }
+    } else {
+        inputNode.className = 'form-control is-invalid';
+
+    }
+}
+
+// function desactivarBTN() {
+//     document.getElementById('btnFind').disabled = true;
+// }
