@@ -1,29 +1,29 @@
-.squaresContainer {
-  width: 300px;
-  height: 300px;
-  margin: 100px auto;
+.container {
+    width: 100%;
 }
 
-.squaresSubContainer {
-  display: flex;
+.container-box {
+    display: block;
+    width: auto;
+    margin: 0 auto;
 }
 
-.square {
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
-  box-sizing: border-box;
-  border: solid 1px black;
-  border-radius: 5px;
-  background-color: silver;
+.box {
+    display: inline-block;
+    height: 200px;
+    width: 200px;
+    border: 1px solid gray;
+    border-radius: 2px;
+    cursor: pointer;
+    padding: 0.5em;
+    background-size: cover;
 }
 
-.circle {
-  background: url('../images/tic.png');
-  background-size: 200px 100px;
-}
+.circle,
 .cross {
-  background: url('../images/tic.png');
-  background-size: 200px 100px;
-  background-position: top right;
+    background-image: url('../images/tic.png');
+}
+
+.cross {
+    background-position: 100%;
 }
