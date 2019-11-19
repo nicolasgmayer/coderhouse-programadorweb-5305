@@ -1,38 +1,43 @@
-var firstDiv = $('#firstDiv');
+var clases = 0;
 
-var contenedor = $("<div />",
+function inicio() {
+    $('#firstDiv').append('<table class="table table-dark">');
+    $('.table').append(`
+       <thead class="thead">
+       <tbody id="tableBody">`);
+    $('.thead').append('<tr class="tr">');
+    $('.tr').append(`
+           <th scope="col">#</th>
+           <th scope="col">Nombre</th>
+           <th scope="col">Género</th>
+           <th scope="col">Altura</th>
+           <th scope="col">Peso</th>
+           <th scope="col">Acción</th>
+           
+       `);
+    $('#tableBody').append(`<tr id=` + i + ` style="overflow: hidden;">`);
+    $('.tr').append(`
+            <td>` + 1 + `</td>
+            <td>Luke Skywalker</td>
+            <td>Male</td>
+            <td>188</td>
+            <td>84</td>
+            <td style="padding:0"><button  type="button" class=" button btn btn-danger">Eliminar</button></td>
+        `);
 
-    {
-        id: "contenedor",
-        "class": "container",
-        css: {
-            "font-weight": "bold",
-            "color": "Black"
-        },
 
-        // click: function(e) { //evento de jQuery
-        //     alert("Hola mundo!");
-        // }
+
+    let deleteBut = $('.button');
+    deleteBut.click(function() {
+        let deleteR = $(this).parent().parent();
+        deleteR.fadeOut(1000, function() {
+            deleteR.remove();
+        });
+
+
+
+
     });
-var tabla1 = $('<table />', {
-    'class': 'table table-dark'
-});
-var thead1 = $('<thead />');
-var tr1 = $('<tr />');
-var th01 = $('<th />', {
-    scope: 'col',
-    text: '#'
-});
-var th02 = $('<th>Nombre<th />');
-th02.attr('scope', 'col');
-var th03 = $('<th>Genero<th />');
-th03.attr('scope', 'col');
+}
 
-
-firstDiv.append(contenedor);
-contenedor.append(tabla1);
-tabla1.append(thead1);
-thead1.append(tr1);
-tr1.append(th01);
-tr1.append(th02);
-tr1.append(th03);
+inicio();

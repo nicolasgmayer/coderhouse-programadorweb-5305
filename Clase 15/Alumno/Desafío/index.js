@@ -1,5 +1,5 @@
 var request = $.ajax({
-    url: "https://swapi.co/api/people/",
+    url: "https://swapi.co/api/people/?page=2",
     method: "GET"
 })
 var clases = 0;
@@ -38,7 +38,7 @@ request.done(function(data) {
     let deleteBut = $('.button');
     deleteBut.click(function() {
         let deleteR = $(this).parent().parent();
-        deleteR.fadeOut(3000, function() {
+        deleteR.fadeOut(1000, function() {
             deleteR.remove();
         });
 
@@ -52,4 +52,3 @@ request.done(function(data) {
 request.fail(function(error) {
     console.log('Error: ', error)
 });
-x
