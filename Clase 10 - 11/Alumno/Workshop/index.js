@@ -19,6 +19,10 @@ txtDNI.onblur = validateDNI;
 btnAdd.onclick = addAlumn;
 btnDel.onclick = deleteAlumn;
 btnFind.onclick = searchAlumn;
+txtNameFind.onkeyup = validateFinderField;
+txtDNIDel.onkeyup = validateDeleteField;
+btnAdd.disabled = 'true';
+btnDel.disabled = 'true';
 
 function validateName(event) {
     inputNode = event.target;
@@ -28,6 +32,7 @@ function validateName(event) {
     } else {
         inputNode.className = 'form-control is-valid';
     }
+    validateFields();
 
 
 }
@@ -40,6 +45,7 @@ function validateLName(event) {
     } else {
         inputNode.className = 'form-control is-valid';
     }
+    validateFields();
 
 
 }
@@ -53,6 +59,7 @@ function validateDNI(event) {
         event.target.className = 'form-control is-valid';
 
     }
+    validateFields();
 }
 
 function existDNI(dniPar) {
@@ -64,8 +71,6 @@ function existDNI(dniPar) {
         if (alumn.dni === dniPar) {
             return true;
         }
-
-
     }
     return false;
 }
@@ -78,35 +83,53 @@ function addAlumn(event) {
         dni: txtDNI.value,
         email: txtEmail.value
     }
-    alumnList.push(newAlumn);
-    console.log(alumnList);
+    if (existDNI(newAlumn.dni) === true) {
+        return 'Ya existe';
+    } else {
+        alumnList.push(newAlumn);
 
-    var bodyTable = document.getElementById('bodyTable');
-    var tr = document.createElement('tr');
-    tr.id = newAlumn.dni;
+        setLocalList('alumn', alumnList);
+        var lista = getLocalList('alumn');
+        console.log(lista);
 
-    var tdNom = document.createElement('td');
-    var tdApe = document.createElement('td');
-    var tdDni = document.createElement('td');
-    var tdEmail = document.createElement('td');
 
-    tdNom.innerHTML = newAlumn.nombre;
-    tdApe.innerHTML = newAlumn.apellido;
-    tdDni.innerHTML = newAlumn.dni;
-    tdEmail.innerHTML = newAlumn.email;
 
-    tr.appendChild(tdNom);
-    tr.appendChild(tdApe);
-    tr.appendChild(tdDni);
-    tr.appendChild(tdEmail);
 
-    bodyTable.appendChild(tr);
 
+        var bodyTable = document.getElementById('bodyTable');
+        var tr = document.createElement('tr');
+        tr.id = newAlumn.dni;
+
+        var tdNom = document.createElement('td');
+        var tdApe = document.createElement('td');
+        var tdDni = document.createElement('td');
+        var tdEmail = document.createElement('td');
+
+        tdNom.innerHTML = newAlumn.nombre;
+        tdApe.innerHTML = newAlumn.apellido;
+        tdDni.innerHTML = newAlumn.dni;
+        tdEmail.innerHTML = newAlumn.email;
+
+        tr.appendChild(tdNom);
+        tr.appendChild(tdApe);
+        tr.appendChild(tdDni);
+        tr.appendChild(tdEmail);
+
+        bodyTable.appendChild(tr);
+    }
 
 }
 
-function deleteAlumn(event) {
+function validateDeleteField() {
+    if (txtDNIDel.value !== '') {
+        btnDel.removeAttribute('disabled');
+    } else {
+        btnDel.disabled = 'true';
+    }
+}
 
+function deleteAlumn(event) {
+    validateDeleteField();
     var bodyTable = document.getElementById('bodyTable');
     var delTr = document.getElementById(txtDNIDel.value);
     bodyTable.removeChild(delTr);
@@ -119,12 +142,31 @@ function deleteAlumn(event) {
         }
 
     }
+    setLocalList('alumn', alumnList);
 
 }
+
+function validateFinderField() {
+    if (txtNameFind.value !== '') {
+        btnFind.removeAttribute('disabled');
+    } else {
+        btnFind.disabled = 'true';
+    }
+}
+
+
+
 
 function searchAlumn(event) {
     var index = 0;
 
+    let elementsTable = document.querySelectorAll('tbody tr');
+    for (let i = 0; i < elementsTable.length; i++) {
+        let trClass = elementsTable[i];
+        if (trClass.className === 'bg-success') {
+            trClass.className = '';
+        }
+    };
     for (let i = 0; i < alumnList.length; i++) {
         const name = alumnList[i].nombre;
         if (name === txtNameFind.value) {
@@ -133,6 +175,7 @@ function searchAlumn(event) {
         }
 
     }
+
 }
 
 function isInTheList() {
@@ -160,8 +203,72 @@ function validateEmail(event) {
         inputNode.className = 'form-control is-invalid';
 
     }
+    validateFields();
 }
 
-// function desactivarBTN() {
-//     document.getElementById('btnFind').disabled = true;
-// }
+function validateFields() {
+    if (txtName.className.indexOf('is-valid') > 0 && txtLName.className.indexOf('is-valid') > 0 && txtDNI.className.indexOf('is-valid') > 0 && txtEmail.className.indexOf('is-valid') > 0) {
+        btnAdd.removeAttribute('disabled');
+    } else {
+        btnAdd.disabled = 'true';
+    }
+}
+
+// Guardado en LocalStorage
+function setLocalList(key, list) {
+    if (!Array.isArray(list) || typeof key !== 'string') {
+        return;
+    }
+    let stringifyList = JSON.stringify(list);
+
+    localStorage.setItem(key, stringifyList);
+}
+// Traer lo guardado en LocalStorage
+function getLocalList(key) {
+    let item = localStorage.getItem(key);
+    if (item !== null && item.length > 0) {
+        if (!Array.isArray(JSON.parse(item))) {
+            return [];
+        }
+        return item;
+    }
+    return [];
+}
+// Mostrar estudiantes guardados
+function showSavedStudents() {
+
+
+    if (localStorage.getItem('alumn') === null) {
+        console.log('no hay nada');
+        return;
+    }
+    studentList = JSON.parse(getLocalList('alumn'));
+    for (let i = 0; i < studentList.length; i++) {
+        let student = studentList[i];
+        if (student !== undefined) {
+            var addedStudents = document.getElementById('bodyTable');
+            var addedRegister = document.createElement('tr');
+            addedRegister.id = student.dni;
+
+            var addedName = document.createElement('td');
+            addedName.innerHTML = student.nombre;
+            addedRegister.appendChild(addedName);
+
+            var addedLastName = document.createElement('td');
+            addedLastName.innerHTML = student.apellido;
+            addedRegister.appendChild(addedLastName);
+
+            var addedId = document.createElement('td');
+            addedId.innerHTML = student.dni;
+            addedRegister.appendChild(addedId);
+
+            var addedEmail = document.createElement('td');
+            addedEmail.innerHTML = student.email;
+            addedRegister.appendChild(addedEmail);
+
+            addedStudents.appendChild(addedRegister);
+        }
+    }
+}
+
+showSavedStudents();
