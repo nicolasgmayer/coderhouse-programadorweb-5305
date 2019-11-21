@@ -15,8 +15,8 @@ function inicio() {
            <th scope="col">Acción</th>
            
        `);
-    $('#tableBody').append(`<tr id=` + i + ` style="overflow: hidden;">`);
-    $('.tr').append(`
+    $('#tableBody').append(`<tr id="abc" style="overflow: hidden;">`);
+    $('#abc').append(`
             <td>` + 1 + `</td>
             <td>Luke Skywalker</td>
             <td>Male</td>
