@@ -1,6 +1,7 @@
 import crossroads from 'crossroads';
 import homeController from './controllers/homeController';
 import peopleController from './controllers/peopleController';
+import localStorageController from './controllers/localStorageController';
 
 function router() {
     crossroads.addRoute('', function() {
@@ -8,12 +9,16 @@ function router() {
     });
 
     crossroads.addRoute('#/contact', function() {
-        $('#root').load('./partials/contact.html', homeController);
+        $('#root').load('./partials/contact.html', contactController);
         console.log('Contact page');
     });
     crossroads.addRoute('#/people', function() {
         $('#root').load('./partials/people.html', peopleController);
         console.log('People page');
+    });
+    crossroads.addRoute('#/local-storage', function() {
+        $('#root').load('./partials/local-storage.html', localStorageController);
+        console.log('Local Storage page');
     });
 
     $(window).on('hashchange', function() {
