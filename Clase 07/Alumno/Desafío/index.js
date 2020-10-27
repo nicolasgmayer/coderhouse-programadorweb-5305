@@ -1,5 +1,8 @@
 localStorage.clear();
 
+
+
+
 function setLocalList(key, value) {
     var newList = JSON.stringify(value);
     var validate = localStorage.getItem(key);
@@ -24,7 +27,11 @@ function buscador(key) {
 }
 
 var testList = ['CARLOS', 'GERONIMO', 'NICOLAS', 'LUCAS'];
+var testList2 = ['1', '2', '3', '4', '5', '6', '7', '8'];
 var res1 = setLocalList('student', testList);
-var res2 = setLocalList('student', testList);
-console.log(buscador('student'));
-console.log(buscador('lista1'));
+var res2 = setLocalList('lista1', testList2);
+var lista1 = buscador('student');
+var lista2 = buscador('lista1');
+
+document.getElementById("lbl1").innerHTML = lista1.join(' ');
+document.getElementById("lbl2").innerHTML = lista2.join(', ');
